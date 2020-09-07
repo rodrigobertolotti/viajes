@@ -14,8 +14,8 @@ class App extends React.Component {
       <NativeRouter>
         <View style={styles.body}>
           <Switch>
-            <Route path="/trip" component={Calendar} />
-            <Route path="/bag" component={Calendar} />
+            <Route path="/trip" component={Trip} />
+            <Route path="/bag" component={Bag} />
             <Route path="/calendar" component={Calendar} />
             <Route component={Calendar} />
           </Switch>
