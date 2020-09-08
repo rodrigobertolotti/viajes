@@ -36,7 +36,7 @@ class Calendar extends React.Component {
 
         return (
             <Momento
-                dia={this.props.dia}
+                dia="Jueves 15 de Junio"
                 descripcion={this.state.descripcion}
                 imagen={this.state.imagen}
                 onClick={() => this.cambiarMomento()}
@@ -50,6 +50,8 @@ export default Calendar;
 
 function Momento(props) {
     const image = { uri: props.imagen };
+    let momento= "";
+    props.manana ? momento= " - AM" : momento= " - PM";  
     return (
         <ImageBackground source={image} style={styles.fondo}>
             <View style={styles.column}>
@@ -59,7 +61,7 @@ function Momento(props) {
                 <View style={styles.row}>
                     <View style={styles.boxTitulo}>
                         <Text style={styles.titulo}>
-                            {props.dia}
+                            {props.dia} {momento}
                         </Text>
                     </View>
                     <View style={styles.boxDescripcion}>
@@ -112,7 +114,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     titulo: {
-        fontSize: 30,
+        fontSize: 28,
         color: 'white',
         marginLeft: 20,
     },

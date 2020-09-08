@@ -1,10 +1,10 @@
 import React from 'react';
-
+import CountDown from './CountDown';
 class Trip extends React.Component{
     render(){
-        return{
-            
-        }
+        return(
+            <CountDown></CountDown>
+        )
     }
 }
 
