@@ -6,41 +6,47 @@ class Calendar extends React.Component {
     state = {
     }
 
-    componentDidMount(){
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
         this.setState({
-            manana: true,
-            imagen: 'https://wallpaperaccess.com/full/1260643.jpg',
-            descripcion: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+            morning: true,
+            date: this.props.data.date,
+            image: this.props.data.imageAM,
+            description: this.props.data.descriptionAM
         })
     }
     cambiarMomento = () => {
         let img = "";
-        let descripcion = " ";
-        let actual = this.state.manana;
-        if (!this.state.manana){
-            img = 'https://wallpaperaccess.com/full/1260643.jpg';
-            descripcion= 'HLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.';
-        }else{
-            img = 'https://www.mordeo.org/files/uploads/2018/04/Empire-State-Building-New-York-City-HD-Mobile-Wallpaper.jpg';
-            descripcion= 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
+        let description = " ";
+        let actual = this.state.morning;
+        if (!this.state.morning) {
+            img = this.props.data.imageAM;
+            description = this.props.data.descriptionAM;
+        } else {
+            img = this.props.data.imagePM;
+            description = this.props.data.descriptionPM;
         }
         this.setState({
-            imagen: img,
-            manana: !actual,
-            descripcion: descripcion
+            image: img,
+            morning: !actual,
+            description: description
         })
-        
+
     }
 
     render() {
 
         return (
             <Momento
-                dia="Jueves 15 de Junio"
-                descripcion={this.state.descripcion}
-                imagen={this.state.imagen}
+                day={this.state.date}
+                description={this.state.description}
+                image={this.state.image}
                 onClick={() => this.cambiarMomento()}
-                manana={this.state.manana}
+                morning={this.state.morning}
+                comeBack={this.props.comeBack}
             ></Momento>
         )
     }
@@ -49,45 +55,52 @@ class Calendar extends React.Component {
 export default Calendar;
 
 function Momento(props) {
-    const image = { uri: props.imagen };
-    let momento= "";
-    props.manana ? momento= " - AM" : momento= " - PM";  
+    const image = { uri: props.image };
+    let moment = "";
+    props.morning ? moment = " - AM" : moment = " - PM";
     return (
-        <ImageBackground source={image} style={styles.fondo}>
+        <ImageBackground source={image} style={styles.background}>
             <View style={styles.column}>
-                <View style={styles.row}>
 
+                <View style={styles.row}>
+                    <TouchableOpacity
+                        onPress={props.comeBack}
+                        style={styles.comeBackButton}>
+                        <Text style={styles.buttonBackText}>
+                            VOLVER
+                        </Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.boxTitulo}>
-                        <Text style={styles.titulo}>
-                            {props.dia} {momento}
+                    <View style={styles.boxTitle}>
+                        <Text style={styles.title}>
+                            {props.day} {moment}
                         </Text>
                     </View>
-                    <View style={styles.boxDescripcion}>
-                        <Text style={styles.descripcion}>
-                            {props.descripcion}
+                    <View style={styles.boxDescription}>
+                        <Text style={styles.description}>
+                            {props.description}
                         </Text>
                     </View>
-                    <View style={styles.boxBotones}>
-                        <View style={styles.rowBoton}></View>
-                        <View style={styles.rowBoton}>
-                            <View style={styles.containerBoton}>
+                    <View style={styles.boxButtons}>
+                        <View style={styles.rowbutton}></View>
+                        <View style={styles.rowbutton}>
+                            <View style={styles.containerbutton}>
                                 <TouchableOpacity
-                                    disabled={props.manana}
+                                    disabled={props.morning}
                                     onPress={props.onClick}
-                                    style={styles.boton}>
-                                    <Text style={styles.textoBoton}>
+                                    style={styles.button}>
+                                    <Text style={styles.buttonText}>
                                         MAÑANA
                                     </Text>
                                 </TouchableOpacity>
                             </View>
-                            <View style={styles.containerBoton}>
+                            <View style={styles.containerbutton}>
                                 <TouchableOpacity
-                                    disabled={!props.manana}
+                                    disabled={!props.morning}
                                     onPress={props.onClick}
-                                    style={styles.boton}>
-                                    <Text style={styles.textoBoton}>
+                                    style={styles.button}>
+                                    <Text style={styles.buttonText}>
                                         TARDE
                                     </Text>
                                 </TouchableOpacity>
@@ -101,7 +114,7 @@ function Momento(props) {
 }
 
 const styles = StyleSheet.create({
-    fondo: {
+    background: {
         height: '100%',
         width: '100%'
     },
@@ -113,29 +126,29 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         flex: 1,
     },
-    titulo: {
+    title: {
         fontSize: 28,
         color: 'white',
         marginLeft: 20,
     },
-    descripcion: {
+    description: {
         fontSize: 16,
         color: 'white',
         margin: 10
     },
-    boxTitulo: {
+    boxTitle: {
         flex: 1,
     },
-    boxBotones: {
+    boxButtons: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center'
     },
-    boxDescripcion: {
+    boxDescription: {
         flex: 3
     },
-    boton: {
+    button: {
         borderRadius: 5,
         backgroundColor: 'white',
         width: '80%',
@@ -144,17 +157,31 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         opacity: 0.7
     },
-    textoBoton: {
+    buttonText: {
         fontSize: 12,
         color: 'black'
     },
-    rowBoton: {
+    rowbutton: {
         flex: 1,
         flexDirection: 'row'
     },
-    containerBoton: {
+    containerbutton: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    comeBackButton: {
+        borderRadius: 5,
+        backgroundColor: 'white',
+        width: '20%',
+        height: '10%',
+        opacity: 0.7,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 20,
+        marginLeft: 20
+    },
+    buttonBackText: {
+        fontSize: 16
     }
 })

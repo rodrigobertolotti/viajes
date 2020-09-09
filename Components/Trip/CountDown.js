@@ -80,33 +80,33 @@ class Countdown extends React.Component {
         return (
             <View style={styles.general}>
                 <View style={styles.divCountdown}>
-                    <View style={styles.divViaje}>
-                        <Text style={styles.viaje}>USA 20'</Text>
+                    <View style={styles.divtrip}>
+                        <Text style={styles.trip}>USA 20'</Text>
                     </View>
                     <View style={styles.divTimer}>
                         <View style={styles.timerBox}>
-                            <Text style={styles.cantidad}>{this.addLeadingZeros(countDown.days)}</Text>
-                            <Text style={styles.medida}>
+                            <Text style={styles.ammount}>{this.addLeadingZeros(countDown.days)}</Text>
+                            <Text style={styles.messure}>
                                 DIAS
                 </Text>
                         </View>
                         <View style={styles.timerBox}>
-                            <Text style={styles.cantidad}>{this.addLeadingZeros(countDown.hours)}</Text>
-                            <Text style={styles.medida}>HORAS</Text>
+                            <Text style={styles.ammount}>{this.addLeadingZeros(countDown.hours)}</Text>
+                            <Text style={styles.messure}>HORAS</Text>
                         </View>
                         <View style={styles.timerBox}>
-                            <Text style={styles.cantidad}>{this.addLeadingZeros(countDown.min)}</Text>
-                            <Text style={styles.medida}>MIN</Text>
+                            <Text style={styles.ammount}>{this.addLeadingZeros(countDown.min)}</Text>
+                            <Text style={styles.messure}>MIN</Text>
                         </View>
                         <View style={styles.timerBox}>
-                            <Text style={styles.cantidad}>{this.addLeadingZeros(countDown.sec)}</Text>
-                            <Text style={styles.medida}>SEG</Text>
+                            <Text style={styles.ammount}>{this.addLeadingZeros(countDown.sec)}</Text>
+                            <Text style={styles.messure}>SEG</Text>
                         </View>
                     </View>
                 </View>
                 <View style={styles.divStich}>
                     <Image
-                        source={require('../../Imagenes/stich.png')}
+                        source={require('../../Images/stich.png')}
                         style={styles.stich}
                     ></Image>
                 </View>
@@ -148,13 +148,13 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         padding: 10
     },
-    divViaje: {
+    divtrip: {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 5,
     },
-    viaje: {
+    trip: {
         fontSize: 48,
         fontWeight: 'bold',
         color: 'rgba(255,255,255,0.8)'
@@ -172,12 +172,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    cantidad: {
+    ammount: {
         fontSize: 26,
         fontWeight: 'bold',
         color: '#2972b6'
     },
-    medida: {
+    messure: {
         fontSize: 10,
         fontWeight: 'bold'
     }

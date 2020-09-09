@@ -7,7 +7,7 @@ class Bag extends React.Component {
     render() {
         return (
             <View style={styles.center}> 
-                <Text style={styles.coming}>PROXIMAMENTE</Text>
+                <Text style={styles.titulo}>PROXIMAMENTE</Text>
             </View>
         )
     }
@@ -20,9 +20,12 @@ const styles= StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center'
     },
-    coming: {
-        fontSize: 24,
-        alignSelf: 'center'
+    titulo: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: 'rgba(255,255,255,0.8)',
+        alignSelf: 'center',
+        margin: 20,
     }
 })
 export default Bag;

@@ -21,7 +21,7 @@ class Item extends React.Component {
             <View style={styles.itemView}>
                 <CheckBox
                     center
-                    title={this.props.descripcion}
+                    title={this.props.description}
                     checked={this.state.checked}
                     onPress={this.check}
                 />

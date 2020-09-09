@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-na
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { NativeRouter, Route, Link, Switch } from "react-router-native";
 import Bag from './Components/Bag/Bag';
-import Calendar from './Components/Calendar/Calendar';
+import ListDays from './Components/Calendar/ListDays';
 import Trip from './Components/Trip/Trip';
 
 class App extends React.Component {
@@ -16,8 +16,8 @@ class App extends React.Component {
           <Switch>
             <Route path="/trip" component={Trip} />
             <Route path="/bag" component={Bag} />
-            <Route path="/calendar" component={Calendar} />
-            <Route component={Calendar} />
+            <Route path="/calendar" component={ListDays} />
+            <Route component={Trip} />
           </Switch>
         </View>
         <View style={styles.footer}>

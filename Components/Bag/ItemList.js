@@ -8,19 +8,19 @@ class ItemList extends React.Component{
         const items= [
             {
                 "id":0,
-                "descripcion":"Protector solar"
+                "description":"Protector solar"
             },
             {
                 "id":1,
-                "descripcion":"Toalla"
+                "description":"Toalla"
             },
             {
                 "id":2,
-                "descripcion":"Gorro"
+                "description":"Gorro"
             },
             {
                 "id":3,
-                "descripcion":"Tarjetas y dinero"
+                "description":"Tarjetas y dinero"
             }
         ]
         
@@ -33,7 +33,7 @@ class ItemList extends React.Component{
                         data={items}
                         renderItem={listItem => {
                             const item = listItem.item;
-                            return <Item key={item.id} descripcion={item.descripcion}></Item>
+                            return <Item key={item.id} description={item.description}></Item>
                         }}
                     />
             </View>
