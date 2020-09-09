@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Image} from 'react-native';
+import { Text, View, StyleSheet, Image } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-
+import { LinearGradient } from 'expo-linear-gradient';
+import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 class CardsCarousel extends React.Component {
 
     constructor(props) {
@@ -11,14 +12,14 @@ class CardsCarousel extends React.Component {
             carouselItems: [
                 {
                     text: "Recuerda que se pueden llevar y traer hasta dos valijas de hasta 23 kg!",
-                    image: "https://img.favpng.com/6/8/20/suitcase-baggage-scalable-vector-graphics-icon-png-favpng-jnES3cU1i8CLwfV3EVCNV9Dgy.jpg"
+                    image: "https://images.vexels.com/media/users/3/128931/isolated/preview/c8701214b16da5fc13b83946691e8b27-travel-bag-icon-by-vexels.png"
                 },
                 {
                     text: "Llevar chicles para el despegue del avion. La presion hace que se te tapen los oídos.",
                     image: "https://icon-library.com/images/air-plane-icon/air-plane-icon-8.jpg"
                 },
                 {
-                    text: "Recuerda llevar la menor cantidad de dinero en efectivo posible. Utilizar la tarjeta MIDINERO que provee la empresa. ",
+                    text: "Recuerda llevar la menor cantidad de dinero en efectivo posible. Utilizar la tarjeta MIDINERO de empresa. ",
                     image: "https://img.icons8.com/plasticine/2x/money.png"
                 },
             ]
@@ -26,20 +27,33 @@ class CardsCarousel extends React.Component {
     }
 
     _renderItem({ item, index }) {
-        const image=item.image;
+        const image = item.image;
+        let color='';
+        index % 2 === 0 ? color= "#2972b6" : color="#4ebcff";
         return (
             <View style={{
                 backgroundColor: 'white',
-                borderRadius: 10,
                 height: 250,
                 padding: 20,
                 marginLeft: 25,
                 marginRight: 25,
             }}>
+                <LinearGradient
+                    // Background Linear Gradient
+                    colors={[color, 'white']}
+                    style={{
+                        position: 'absolute',
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        height: 150,
+                    }}
+                />
+                <Text style={styles.tipText}>TIP {index + 1}</Text>
                 <Image
-                        source={{uri: image}}
-                        style={styles.suitcase}
-                    ></Image>
+                    source={{ uri: image }}
+                    style={styles.suitcase}
+                ></Image>
                 <Text style={styles.text}>{item.text}</Text>
             </View>
 
@@ -52,7 +66,7 @@ class CardsCarousel extends React.Component {
                 <Text style={styles.titulo}>RECOMENDACIONES</Text>
                 <View style={styles.background}>
                     <Carousel
-                        layout={"stack"}
+                        layout={"default"}
                         ref={ref => this.carousel = ref}
                         data={this.state.carouselItems}
                         sliderWidth={300}
@@ -91,9 +105,17 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     text: {
-        fontSize: 16,
-        marginTop: 20,
-        alignSelf: 'center'
+        fontSize: 14,
+        marginTop: 15,
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    tipText: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: 'white',
+        alignSelf: 'flex-start',
     }
 })
 

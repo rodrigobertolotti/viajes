@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, ImageBackground, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { NativeRouter, Route, Link, Switch } from "react-router-native";
 import Bag from './Components/Bag/Bag';
@@ -8,42 +8,67 @@ import Trip from './Components/Trip/Trip';
 
 class App extends React.Component {
 
+  state = {
+
+  }
+
+  componentDidMount() {
+    this.setState({
+      loading: true
+    })
+  }
+
+  endLoading = () => {
+    this.setState({
+      loading: false
+    })
+  }
   render() {
+    const image = { uri: "https://wallpapercave.com/wp/wp2184636.jpg" };
     return (
       <SafeAreaView style={styles.container}>
-      <NativeRouter>
-        <View style={styles.body}>
-          <Switch>
-            <Route path="/trip" component={Trip} />
-            <Route path="/bag" component={Bag} />
-            <Route path="/calendar" component={ListDays} />
-            <Route component={Trip} />
-          </Switch>
-        </View>
-        <View style={styles.footer}>
-          <View style={styles.footerBox}>
-            <Link to="/trip" component={TouchableOpacity}>
-              <View style={styles.center}>
-                <Icon name="plane" size={24} color="grey" />
+        <ImageBackground
+          source={image}
+          onLoadEnd={this.endLoading}
+          style={styles.image}>
+          {!this.state.loading ?
+            <NativeRouter>
+              <View style={styles.body}>
+                <Switch>
+                  <Route path="/trip" component={Trip} />
+                  <Route path="/bag" component={Bag} />
+                  <Route path="/calendar" component={ListDays} />
+                  <Route component={Trip} />
+                </Switch>
               </View>
-            </Link>
-          </View>
-          <View style={styles.footerBox}>
-            <Link to="/bag" component={TouchableOpacity}>
-              <View style={styles.centrado}>
-                <Icon name="suitcase" size={24} color="grey" />
+              <View style={styles.footer}>
+                <View style={styles.footerBox}>
+                  <Link to="/trip" component={TouchableOpacity}>
+                    <View style={styles.center}>
+                      <Icon name="plane" size={24} color="grey" />
+                    </View>
+                  </Link>
+                </View>
+                <View style={styles.footerBox}>
+                  <Link to="/bag" component={TouchableOpacity}>
+                    <View style={styles.centrado}>
+                      <Icon name="suitcase" size={24} color="grey" />
+                    </View>
+                  </Link>
+                </View>
+                <View style={styles.footerBox}>
+                  <Link to="/calendar" component={TouchableOpacity}>
+                    <View style={styles.centrado}>
+                      <Icon name="calendar" size={24} color="grey" />
+                    </View>
+                  </Link>
+                </View>
               </View>
-            </Link>
-          </View>
-          <View style={styles.footerBox}>
-            <Link to="/calendar" component={TouchableOpacity}>
-              <View style={styles.centrado}>
-                <Icon name="calendar" size={24} color="grey" />
-              </View>
-            </Link>
-          </View>
-        </View>
-      </NativeRouter>
+            </NativeRouter>
+            :
+            <View style={styles.loading}></View>
+          }
+        </ImageBackground>
       </SafeAreaView>
     );
   }
@@ -53,7 +78,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    },
+  },
   body: {
     flex: 12,
     backgroundColor: 'rgba(78,188,255,0.5)',
@@ -79,8 +104,15 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     marginTop: 5
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
+  },
+  loading: {
+    backgroundColor: 'red'
   }
-
 })
 
 export default App;
